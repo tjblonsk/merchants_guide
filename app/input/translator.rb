@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require './app/repos/currency_repo'
 require './app/repos/mineral_repo'
 require './monkey_patches/string'
@@ -29,7 +31,7 @@ class Translator
   end
 
   def invalid_input
-    @line_hash[:invalid].map do |line|
+    @line_hash[:invalid].map do |_line|
       INVALID_INPUT_RESPONSE
     end
   end
@@ -39,22 +41,46 @@ class Translator
   def group_lines(lines)
     lines.each_with_object(init_line_hash) do |line, line_hash|
       # returns an array => [pattern, proc]
-      proc = patterns.find { |pattern, proc| line =~ pattern }&.last
+      proc = patterns.find { |pattern, _proc| line =~ pattern }&.last
       proc ? proc.call(line, line_hash) : line_hash[:invalid] << line
     end
   end
 
   def patterns
-    patterns = {
+    {
       # Matches 'glob is I'.
-      /\w{4}\sis\s[A-Z]+$/  => -> (line, line_hash) { line_hash[:currency] << line },
+      /\w{4}\sis\s[A-Z]+$/  => currency_proc,
       # Matches 'glob glob Silver is 34 Credits'.
-      /is\s\d+\sCredits$/   => -> (line, line_hash) { line_hash[:mineral] << line },
+      /is\s\d+\sCredits$/   => mineral_proc,
       # Matches 'how much is pish tegj glob glob ?'.
-      /^how much is/        => -> (line, line_hash) { line_hash[:currency_questions] << line },
+      /^how much is/        => currency_question_proc,
       # Matches 'how many Credits is glob prok Silver ?'.
-      /^how many Credits/   => -> (line, line_hash) { line_hash[:mineral_questions] << line }
+      /^how many Credits/   => mineral_question_proc
     }
+  end
+
+  def currency_proc
+    proc do |line, line_hash|
+      line_hash[:currency] << line
+    end
+  end
+
+  def mineral_proc
+    proc do |line, line_hash|
+      line_hash[:mineral] << line
+    end
+  end
+
+  def currency_question_proc
+    proc do |line, line_hash|
+      line_hash[:currency_questions] << line
+    end
+  end
+
+  def mineral_question_proc
+    proc do |line, line_hash|
+      line_hash[:mineral_questions] << line
+    end
   end
 
   def init_line_hash

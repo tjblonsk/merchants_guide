@@ -23,6 +23,10 @@ glob prok Iron is 782 Credits
 I have no idea what you are talking about
 ```
 
+### Tests
+Specs defined using [Minitest](https://github.com/seattlerb/minitest)
+Rubcop for code quality.
+
 ### Sample Input
 glob is I
 prok is V
@@ -41,7 +45,3 @@ how much wood could a woodchuck chuck if a woodchuck could chuck wood ?
 Input will vary but be delivered in a txt file in the format provided in sample output.
 Valid currencies are glob, prok, pish, and tegj.
 Valid minerals are Silver, Gold, and Iron.
-
-### Tests
-Specs defined using [Minitest](https://github.com/seattlerb/minitest)
-Rubcop for code quality.

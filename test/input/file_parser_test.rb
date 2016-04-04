@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'minitest/autorun'
 require './app/input/file_parser'
 
@@ -9,11 +10,10 @@ describe FileParser do
   end
 
   it 'must parse a txt file into an array of lines' do
-    @file_parser.parse_lines_from_file.must_equal File.open(@path).readlines
+    @file_parser.parse_lines.must_equal File.open(@path).readlines
   end
 
-  it 'must output an error if no file path is provided' do
-    output = $stdout.puts 'Please provide a valid file path'
-    proc { @invalid_parser.parse_lines_from_file }.must_output(output)
+  it 'must raise an error if no file path is provided' do
+    proc { @invalid_parser.parse_lines }.must_raise(RuntimeError)
   end
 end

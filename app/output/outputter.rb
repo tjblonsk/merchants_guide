@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Aggregates translations from the injected translator,
 # formats and outputs the translations
 class Outputter

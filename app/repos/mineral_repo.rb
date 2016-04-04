@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require './monkey_patches/string'
 
 # Given an array of input in form of 'glob glob Silver is 34 Credits',

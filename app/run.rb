@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require './app/input/file_parser'
 require './app/input/translator'
 require './app/output/outputter'

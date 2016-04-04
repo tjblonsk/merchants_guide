@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Monkey patches for String class.
 # Use sparingly.
 class String
@@ -15,7 +17,7 @@ class String
     'V'  => 5,
     'IV' => 4,
     'I'  => 1
-  }
+  }.freeze
 
   # 'IVX' => 14
   def to_arabic
