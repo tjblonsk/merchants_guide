@@ -18,13 +18,13 @@ require './currency_repo'
       currency_repo = CurrencyRepo.new(currency_lines)
       @mineral_repo = MineralRepo.new(mineral_lines, currency_repo)
       @minerals = {
-        'Gold' => 14450,
         'Silver' => 17,
+        'Gold' => 14450,
         'Iron' => 195.5
       }
     end
 
     it 'must set mineral prices' do
-      @repo.minerals.must_equal @minerals
+      @mineral_repo.minerals.must_equal @minerals
     end
   end
