@@ -10,8 +10,6 @@ class FileParser
   def parse_lines
     check_path_presence
     readlines
-  rescue => e
-    raise e.message
   end
 
   private
