@@ -24,24 +24,28 @@ I have no idea what you are talking about
 ```
 
 ### Tests
-Specs defined using [Minitest](https://github.com/seattlerb/minitest)
+Specs defined using [Minitest](https://github.com/seattlerb/minitest).
+Run specs with:
+```
+ruby -Ilib:test test/path/to/spec
+```
 Rubcop for code quality.
 
 ### Sample Input
-glob is I
-prok is V
-pish is X
-tegj is L
-glob glob Silver is 34 Credits
-glob prok Gold is 57800 Credits
-pish pish Iron is 3910 Credits
-how much is pish tegj glob glob ?
-how many Credits is glob prok Silver ?
-how many Credits is glob prok Gold ?
-how many Credits is glob prok Iron ?
-how much wood could a woodchuck chuck if a woodchuck could chuck wood ?
+glob is I</br>
+prok is V</br>
+pish is X</br>
+tegj is L</br>
+glob glob Silver is 34 Credits</br>
+glob prok Gold is 57800 Credits</br>
+pish pish Iron is 3910 Credits</br>
+how much is pish tegj glob glob ?</br>
+how many Credits is glob prok Silver ?</br>
+how many Credits is glob prok Gold ?</br>
+how many Credits is glob prok Iron ?</br>
+how much wood could a woodchuck chuck if a woodchuck could chuck wood ?</br>
 
 ### Assumptions
-Input will vary but be delivered in a txt file in the format provided in sample output.
-Valid currencies are glob, prok, pish, and tegj.
-Valid minerals are Silver, Gold, and Iron.
+* Input will vary but be delivered in a txt file in the format provided in sample output.
+* Valid currencies are glob, prok, pish, and tegj.
+* Valid minerals are Silver, Gold, and Iron.
