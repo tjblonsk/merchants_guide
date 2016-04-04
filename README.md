@@ -4,12 +4,27 @@ Merchant's Guide To The Galaxy
 ### Mission
 Convert numbers and units based on intergalactic transactions.
 
+### Assumptions
+* Input will vary but be delivered in a txt file in the format provided in sample output.
+* Valid currencies are glob, prok, pish, and tegj.
+* Valid minerals are Silver, Gold, and Iron.
+
+### Architecture
+* Repos
+** One repo for managing each types of data: currency and minerals.
+* Input
+** Two concerns: parse the incoming data, translate the data to meaningful output.
+** FileParser is responsible for parsing incoming data.
+** Translator is responsible for translating the input.
+* Output
+** Outputter is concerned with presenting translations to the user.
+
 ### Usage
 Clone the repository
 ```
 $ git clone git@github.com:tjblonsk/merchants_guide.git && cd merchants_guide
 ```
-Pass the program a text file that follows the below input contract:
+Pass the program a text file that follows the below sample input format:
 ```
 ruby app/run.rb 'path/to/input.txt'
 ```
@@ -44,8 +59,3 @@ how many Credits is glob prok Silver ?</br>
 how many Credits is glob prok Gold ?</br>
 how many Credits is glob prok Iron ?</br>
 how much wood could a woodchuck chuck if a woodchuck could chuck wood ?</br>
-
-### Assumptions
-* Input will vary but be delivered in a txt file in the format provided in sample output.
-* Valid currencies are glob, prok, pish, and tegj.
-* Valid minerals are Silver, Gold, and Iron.
