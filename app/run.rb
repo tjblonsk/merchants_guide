@@ -1,22 +1,12 @@
+require './app/input/file_parser'
 require './app/input/translator'
+require './app/output/outputter'
 
 begin
+  lines = FileParser.new(ARGV[0]).parse_lines
   translator = Translator.new(lines)
-
-  # @returns [String, String]
-  def output(translator)
-    currency_question_output  = translator.translate_currency_questions
-    mineral_question_output   = translator.translate_mineral_questions
-    currency_question_output.concat(mineral_question_output)
-  end
-
-  output = output(translator)
-  output.each do |line|
-    $stdout.puts line
-  end
-
-  $stdout.puts 'I have no idea what you are talking about' if output.empty?
+  Outputter.new(translator).output
 rescue => e
-  $stdout.puts
-  exit(1)
+  $stdout.puts "Error: #{e.message}"
+  $stdout.puts "Backtrace: #{e.backtrace.join("\n")}"
 end

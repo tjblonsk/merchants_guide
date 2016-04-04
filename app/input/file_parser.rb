@@ -3,12 +3,11 @@ class FileParser
     @file_path = file_path
   end
 
-  def parse_lines_from_file
+  def parse_lines
     check_path_presence
-    parse_lines
+    readlines
   rescue => e
-    p e.message
-    $stdout.puts e.message
+    raise e.message
   end
 
   private
@@ -17,7 +16,7 @@ class FileParser
     raise 'Please provide a valid file path' if @file_path.nil?
   end
 
-  def parse_lines
+  def readlines
     File.open(@file_path).readlines
   rescue => e
     raise "Error reading from file: #{e.message}."
