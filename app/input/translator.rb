@@ -2,6 +2,11 @@ require './app/repos/currency_repo'
 require './app/repos/mineral_repo'
 require './monkey_patches/string'
 
+# Sorts lines of input.
+# Passes currency and mineral value input to
+# the respective repos.
+# Translates currency and mineral totalling questions
+# to human readable strings.
 class Translator
   def initialize(lines)
     @lines          = lines
@@ -44,18 +49,18 @@ class Translator
   end
 
   def currency_question_output(line)
-    currency_string       = line[/how much is\s(.*?)\s\?/, 1]
-    roman_numeral_string  = @currency_repo.to_roman(currency_string)
+    currency = line[/how much is\s(.*?)\s\?/, 1]
+    numeral  = @currency_repo.to_roman(currency)
 
-    "#{currency_string} is #{roman_numeral_string.to_arabic}"
+    "#{currency} is #{numeral.to_arabic}"
   end
 
   def mineral_question_output(line)
-    currency_string       = line[/^how many Credits is\s(.*?)\s(gold|silver|iron)/i, 1]
-    mineral               = line[/gold|silver|iron/i]
-    roman_numeral_string  = @currency_repo.to_roman(currency_string)
-    total                 = roman_numeral_string.to_arabic * @mineral_repo.minerals[mineral]
+    currency = line[/^how many Credits is\s(.*?)\s(gold|silver|iron)/i, 1]
+    mineral  = line[/gold|silver|iron/i]
+    numeral  = @currency_repo.to_roman(currency)
+    total    = numeral.to_arabic * @mineral_repo.minerals[mineral]
 
-    "#{currency_string} #{mineral} is #{total.round(0)} Credits"
+    "#{currency} #{mineral} is #{total.round(0)} Credits"
   end
 end
