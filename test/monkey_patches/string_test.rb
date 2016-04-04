@@ -1,4 +1,4 @@
-require "minitest/autorun"
+require 'minitest/autorun'
 require './monkey_patches/string'
 
 describe String do

@@ -16,6 +16,4 @@ output.each do |line|
   $stdout.puts line
 end
 
-if output.empty?
-  $stdout.puts 'I have no idea what you are talking about'
-end
+$stdout.puts 'I have no idea what you are talking about' if output.empty?

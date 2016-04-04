@@ -16,11 +16,11 @@ describe Translator do
   end
 
   describe 'output' do
-    it 'must detect a currency totaling question and output the correct result' do
+    it 'must translate currency totaling questions' do
       @translator.translate_currency_questions.must_equal @currency_translation
     end
 
-    it 'detects a mineral totaling question and outputs the correct result' do
+    it 'must translate mineral totaling questions' do
       @translator.translate_mineral_questions.must_equal @mineral_translation
     end
   end

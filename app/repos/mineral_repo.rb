@@ -1,14 +1,17 @@
 require './monkey_patches/string'
 
+# Given an array of input in form of 'glob glob Silver is 34 Credits',
+# calculates the per unit value of each mineral and
+# sets a hash of mineral values in @minerals.
 class MineralRepo
   attr_reader :minerals
 
   def initialize(lines, curreny_repo)
     @curreny_repo = curreny_repo
-    @minerals = set_minerals(lines)
+    @minerals = mineral_values(lines)
   end
 
-  def set_minerals(lines)
+  def mineral_values(lines)
     lines.each_with_object({}) do |line, obj|
       obj[mineral(line)] = total_cost(line).to_f / currency_total(line).to_f
     end

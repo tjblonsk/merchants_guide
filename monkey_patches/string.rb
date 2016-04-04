@@ -1,3 +1,5 @@
+# Monkey patches for String class.
+# Use sparingly.
 class String
   ROMAN_NUMS = {
     'M'  => 1000,
@@ -15,13 +17,14 @@ class String
     'I'  => 1
   }
 
+  # 'IVX' => 14
   def to_arabic
-    str = self.upcase
+    string = upcase
     total = 0
     ROMAN_NUMS.each do |numeral, value|
-      while str.index(numeral) == 0
+      while string.index(numeral) == 0
         total += value
-        str.slice!(numeral)
+        string.slice!(numeral)
       end
     end
 
