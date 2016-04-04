@@ -10,11 +10,13 @@ class CurrencyRepo
     currency_string.split(' ').map { |currency| @currencies[currency] }.join('')
   end
 
+  private
+
   def set_currencies(lines)
     lines.each_with_object({}) do |line, obj|
-      currency = line.match(/glob|prok|pish|tegj/)[0]
-      numeral = line.split(' ').last
-      obj[currency] = numeral
+      currency       = line.match(/glob|prok|pish|tegj/)[0]
+      numeral        = line.split(' ').last
+      obj[currency]  = numeral
     end
   end
 end

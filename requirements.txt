@@ -16,18 +16,6 @@ It converts an into to a symbol
 Given a combination of symbols, can find a sum
   When smaller values precede larger values, the smaller values are subtracted from the larger values, and the result is added to the total.
 
-Validations
-  Repeats
-    - The symbols "I", "X", "C", and "M" can be repeated three times in succession, but no more. (They may appear four times if the third and fourth are separated by a smaller value, such as XXXIX.)
-    - "D", "L", and "V" can never be repeated.
-
-  Subtractions
-    - "I" can be subtracted from "V" and "X" only.
-    - "X" can be subtracted from "L" and "C" only.
-    - "C" can be subtracted from "D" and "M" only.
-    - "V", "L", and "D" can never be subtracted.
-    - Only one small-value symbol may be subtracted from any large-value symbol.
-
 Input
   It can parse a file from an path via arg in command line
   It can detect if a line is to Roman(glob is I), to Arabic(glob glob Silver is 34 Credits), or totaling(how many Credits is glob prok Silver ?)
@@ -62,14 +50,16 @@ Input
       def set_currencies(lines)
         lines.each_with_object({}) do |line, obj|
         globs = line.scan(/glob/).count
-        mineral = line.match(/gold|silver|iron/)[0]
+        currencies = line.split(/\s/gold|silver|iron/i)
+        mineral = line.match(/gold|silver|iron/i)[0]
         total_cost = line.match(/\n/)
         total_globs = CurrencyRepo.new.currencies[glob] * globs
         obj[mineral] = total_cost / total_globs
 
 
   # how many Credits is glob prok Silver
-  Totaler.new(currency_repo.total(glob: 1, prok: 1), mineral_repo.silver)
+  roman_total = currency_repo.to_roman( glob: 1, prok: 1)
+  romant_total.to_arabic * mineral_repo.silver
 
 
 
