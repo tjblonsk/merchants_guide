@@ -8,44 +8,63 @@ require './monkey_patches/string'
 # Translates currency and mineral totalling questions
 # to human readable strings.
 class Translator
+  INVALID_INPUT_RESPONSE = 'I have no idea what you are talking about'
+
   def initialize(lines)
-    @lines          = lines
-    @currency_repo  = CurrencyRepo.new(currency_lines)
-    @mineral_repo   = MineralRepo.new(mineral_lines, @currency_repo)
+    @line_hash      = group_lines(lines)
+    @currency_repo  = CurrencyRepo.new(@line_hash[:currency])
+    @mineral_repo   = MineralRepo.new(@line_hash[:mineral], @currency_repo)
   end
 
   def translate_currency_questions
-    currency_question_lines.map do |line|
+    @line_hash[:currency_questions].map do |line|
       currency_question_output(line)
     end
   end
 
   def translate_mineral_questions
-    mineral_question_lines.map do |line|
+    @line_hash[:mineral_questions].map do |line|
       mineral_question_output(line)
+    end
+  end
+
+  def invalid_input
+    @line_hash[:invalid].map do |line|
+      INVALID_INPUT_RESPONSE
     end
   end
 
   private
 
-  # Matches 'glob is I'
-  def currency_lines
-    @lines.select { |line| line =~ /\w{4}\sis\s[A-Z]+$/ }
+  def group_lines(lines)
+    lines.each_with_object(init_line_hash) do |line, line_hash|
+      # returns an array => [pattern, proc]
+      proc = patterns.find { |pattern, proc| line =~ pattern }&.last
+      proc ? proc.call(line, line_hash) : line_hash[:invalid] << line
+    end
   end
 
-  # Matches 'glob glob Silver is 34 Credits'
-  def mineral_lines
-    @lines.select { |line| line =~ /is\s\d+\sCredits$/ }
+  def patterns
+    patterns = {
+      # Matches 'glob is I'.
+      /\w{4}\sis\s[A-Z]+$/  => -> (line, line_hash) { line_hash[:currency] << line },
+      # Matches 'glob glob Silver is 34 Credits'.
+      /is\s\d+\sCredits$/   => -> (line, line_hash) { line_hash[:mineral] << line },
+      # Matches 'how much is pish tegj glob glob ?'.
+      /^how much is/        => -> (line, line_hash) { line_hash[:currency_questions] << line },
+      # Matches 'how many Credits is glob prok Silver ?'.
+      /^how many Credits/   => -> (line, line_hash) { line_hash[:mineral_questions] << line }
+    }
   end
 
-  # Matches 'how much is pish tegj glob glob ?'
-  def currency_question_lines
-    @lines.select { |line| line =~ /^how much is/ }
-  end
-
-  # Matches 'how many Credits is glob prok Silver ?'
-  def mineral_question_lines
-    @lines.select { |line| line =~ /^how many Credits/ }
+  def init_line_hash
+    {
+      currency: [],
+      mineral: [],
+      currency_questions: [],
+      mineral_questions: [],
+      invalid: []
+    }
   end
 
   def currency_question_output(line)

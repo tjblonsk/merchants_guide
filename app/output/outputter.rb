@@ -17,6 +17,7 @@ class Outputter
   def sum_translations
     currency_question_output  = @translator.translate_currency_questions
     mineral_question_output   = @translator.translate_mineral_questions
-    currency_question_output.concat(mineral_question_output)
+    invalid                   = @translator.invalid_input
+    currency_question_output + mineral_question_output + invalid
   end
 end

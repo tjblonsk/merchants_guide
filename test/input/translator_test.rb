@@ -13,6 +13,7 @@ describe Translator do
       'glob prok Gold is 57800 Credits',
       'glob prok Iron is 782 Credits'
     ]
+    @invalid = ['I have no idea what you are talking about']
   end
 
   describe 'output' do
@@ -22,6 +23,10 @@ describe Translator do
 
     it 'must translate mineral totaling questions' do
       @translator.translate_mineral_questions.must_equal @mineral_translation
+    end
+
+    it 'must notify of invalid translations' do
+      @translator.invalid_input.must_equal @invalid
     end
   end
 end
