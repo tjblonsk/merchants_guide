@@ -5,7 +5,7 @@ require './app/output/outputter'
 describe Outputter do
   before do
     lines = File.open('./test/fixtures/input.txt').readlines
-    @output = $stdout.puts output(lines)
+    @output = $stdout.puts output
     translator = Translator.new(lines)
     @outputter = Outputter.new(translator)
   end
@@ -14,7 +14,7 @@ describe Outputter do
     proc { @outputter.output }.must_output(@output)
   end
 
-  def output(lines)
+  def output
     [
       'pish tegj glob glob is 42',
       'glob prok Silver is 68 Credits',

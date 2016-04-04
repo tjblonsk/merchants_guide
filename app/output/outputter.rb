@@ -1,3 +1,5 @@
+# Aggregates translations from the injected translator,
+# formats and outputs the translations
 class Outputter
   def initialize(translator)
     @translator = translator

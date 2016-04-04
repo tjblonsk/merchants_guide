@@ -1,3 +1,5 @@
+# Given a path to a file located on the machine,
+# opens the file and returns an array of lines.
 class FileParser
   def initialize(file_path)
     @file_path = file_path
