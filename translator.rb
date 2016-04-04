@@ -1,5 +1,5 @@
-require './currency_repo'
-require './mineral_repo'
+require './app/repos/currency_repo'
+require './app/repos/mineral_repo'
 require './monkey_patches/string'
 
 class Translator

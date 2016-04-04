@@ -1,7 +1,7 @@
 require "minitest/autorun"
 require './translator'
-require './currency_repo'
-require './mineral_repo'
+require './app/repos/currency_repo'
+require './app/repos/mineral_repo'
 
 describe Translator do
   before do
