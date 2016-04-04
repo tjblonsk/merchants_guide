@@ -1,6 +1,6 @@
-require "minitest/autorun"
-require './mineral_repo'
-require './currency_repo'
+require 'minitest/autorun'
+require './app/repos/mineral_repo'
+require './app/repos/currency_repo'
 
   describe MineralRepo do
     before do

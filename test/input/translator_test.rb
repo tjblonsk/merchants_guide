@@ -1,5 +1,5 @@
-require "minitest/autorun"
-require './translator'
+require 'minitest/autorun'
+require './app/input/translator'
 require './app/repos/currency_repo'
 require './app/repos/mineral_repo'
 

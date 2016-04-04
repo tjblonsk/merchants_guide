@@ -1,5 +1,5 @@
-require "minitest/autorun"
-require './currency_repo'
+require 'minitest/autorun'
+require './app/repos/currency_repo'
 
 describe CurrencyRepo do
   before do
