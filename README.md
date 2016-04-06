@@ -20,11 +20,17 @@ Convert numbers and units based on intergalactic transactions.
 ** Outputter is concerned with presenting translations to the user.
 
 ### Usage
+Make sure you are using Ruby 2.3 or higher
+```
+$ ruby -v
+=> 2.3
+```
 Clone the repository
 ```
 $ git clone git@github.com:tjblonsk/merchants_guide.git && cd merchants_guide
+$ bundle install
 ```
-Pass the program a text file that follows the below sample input format:
+Pass the program a text file as an argument that follows the below sample input format:
 ```
 ruby app/run.rb 'path/to/input.txt'
 ```
